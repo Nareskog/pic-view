@@ -1,4 +1,4 @@
-package se.tmn.picview;
+package se.tmn.utils;
 public class Logger {
 	private enum ErrorLevel {
 		Debug, Info, Warning, Error, Fatal
@@ -8,6 +8,22 @@ public class Logger {
 		System.out.println(message);
 	}
 
+
+	static public void i(String message) {
+		printLog(ErrorLevel.Info, message, null);
+	}
+
+	static public void i(String message, Exception ex) {
+		printLog(ErrorLevel.Info, message, ex);
+	}
+
+	static public void w(String message) {
+		printLog(ErrorLevel.Warning, message, null);
+	}
+
+	static public void w(String message, Exception ex) {
+		printLog(ErrorLevel.Warning, message, ex);
+	}
 
 	static public void e(String message) {
 		printLog(ErrorLevel.Error, message, null);
@@ -25,10 +41,10 @@ public class Logger {
 	}
 
 	private static void printLog(ErrorLevel level, String message, Exception ex) {
-		if (ex == null) {
-			System.out.println(message);
-		} else {
-			System.out.println(message + " - " + ex.getMessage());
+		if (ex != null) {
+			message = message + " - " + ex.getMessage();
 		}
+
+		System.out.println(message);
 	}
 }
